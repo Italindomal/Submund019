@@ -1,0 +1,861 @@
+/* =========================================================
+   BASE / RESET GERAL DA PÁGINA
+========================================================= */
+
+body{
+    margin: 0; /* remove a margem padrão do navegador */
+    overflow-x: hidden; /* evita rolagem horizontal indesejada */
+    background-color: #ffffff;
+    
+}
+
+
+/* =========================================================
+   BOTÃO "VOLTAR"
+   Link para voltar à tela anterior (ex.: catálogo). Fica
+   acima da imagem/info do produto.
+========================================================= */
+
+.voltar{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 24px 5% 0;
+  padding: 10px 18px;
+
+  border: 1px solid #ddd;
+  border-radius: 999px;
+
+  background: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: border-color .2s ease, background-color .2s ease, color .2s ease;
+}
+
+.voltar:hover{
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+
+/* setinha "<" desenhada só com borda, sem precisar de imagem/ícone */
+.voltar::before{
+  content: "";
+  width: 7px;
+  height: 7px;
+
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(135deg);
+}
+
+/* =========================================================
+   PRODUTO (PÁGINA DE DETALHES)
+   Container principal: miniaturas + imagem grande + info,
+   lado a lado.
+========================================================= */
+
+.produto{
+  display:flex;
+  gap:60px;
+
+  padding:60px 80px;
+
+  align-items:flex-start;
+}
+
+/* =========================================================
+   MINIATURAS
+   Coluna de thumbnails clicáveis ao lado da imagem principal.
+========================================================= */
+
+.miniaturas{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.thumb{
+  width:85px;
+  height:100px;
+
+  object-fit:cover; /* recorta a imagem mantendo proporção */
+
+  border-radius:12px;
+
+  background:#f5f5f5;
+
+  cursor:pointer;
+
+  border:2px solid transparent; /* espaço reservado pra borda de "ativo" */
+
+  transition:.3s;
+
+  box-shadow:0 4px 10px rgba(0,0,0,.04);
+}
+
+.thumb:hover{
+  transform:scale(1.05);
+
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+/* miniatura correspondente à imagem grande atual (controlada via JS) */
+.thumb.active{
+  border:2px solid #111;
+}
+
+/* =========================================================
+   IMAGEM GRANDE (FOTO PRINCIPAL DO PRODUTO)
+   (versão responsiva final — antes havia uma segunda definição
+   lá embaixo, no bloco "AJUSTES RESPONSIVOS FINAIS", que só
+   sobrescrevia largura/altura; juntei as duas aqui pra não ter
+   a mesma regra duas vezes no arquivo)
+========================================================= */
+
+.imagem-principal{
+    width: min(580px, 100%);
+    aspect-ratio: 1 / 1;
+
+    background: #f5f5f5;
+    border-radius: 20px;
+    flex-shrink: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imagem-principal:hover{
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+
+.imagem-principal img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* mostra a imagem inteira, sem cortar */
+}
+
+.imagem-principal:hover img{
+  transform:scale(1.03); /* leve zoom no hover */
+}
+
+/* =========================================================
+   INFO (nome, preço, tamanhos, botão de compra etc.)
+========================================================= */
+
+.info{
+  width:420px;
+
+  padding-top:20px;
+
+  animation:subir .5s ease; /* anima entrada da coluna de info */
+}
+
+/* animação de "subir e aparecer" usada no .info */
+@keyframes subir{
+
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.info h1{
+  font-size:38px;
+  margin-bottom:20px;
+  
+}
+
+/* preço "de" riscado, mostrado acima do preço atual quando há desconto */
+.preco-antigo{
+  color:#888;
+  text-decoration:line-through;
+  font-size:18px;}
+
+.preco{
+  font-size:42px;
+  font-weight:bold;
+
+  margin-bottom: 40px;
+}
+
+/* texto de desconto no pix, avisos de parcelamento etc. */
+.pix{
+  color:#555;
+
+  margin-bottom:30px;
+}
+
+/* =========================================================
+   SELEÇÃO DE TAMANHO
+   Grade de botões de tamanho (P/M/G etc.), feita com
+   input[type=radio/checkbox] escondido + <span> estilizado.
+========================================================= */
+
+.tamanhos{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:35px;
+}
+
+/* esconde o input real, quem aparece pro usuário é o <span> */
+.tamanho-btn input{
+  display:none;
+}
+
+.tamanho-btn span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  height:45px;
+
+  border:1px solid #ddd;
+  border-radius:12px;
+
+  background:#fff;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+  transition:.25s;
+}
+
+.tamanho-btn span:hover{
+  border-color:#E5E5E5;
+  transform:translateY(-2px);
+}
+
+/* estilo do tamanho selecionado (quando o input escondido está "checked") */
+.tamanho-btn input:checked + span{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+/* =========================================================
+   ÁREA DE AÇÕES (quantidade + botão de comprar lado a lado)
+========================================================= */
+
+.acoes-produto{
+  display:flex;
+  gap:15px;
+
+  margin-bottom:35px;
+}
+
+/* =========================================================
+   SELETOR DE QUANTIDADE (- 1 +)
+========================================================= */
+
+.quantidade{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  width:140px;
+  height:52px;
+  margin-top:20px; 
+  background:#f5f5f5;
+
+  border:1px solid #e5e5e5;
+  border-radius:50px;
+}
+
+.quantidade button{
+  width:45px;
+  height:45px;
+
+  border:none;
+  background:transparent;
+
+  font-size:24px;
+  font-weight:bold;
+
+  cursor:pointer;
+  transition:.3s;
+}
+
+.quantidade button:hover{
+  color:#666;
+  transform:scale(1.1);
+}
+
+.quantidade span{
+  font-size:18px;
+  font-weight:600;
+}
+
+/* =========================================================
+   BOTÃO "COMPRAR"
+========================================================= */
+
+.comprar{
+  flex:1;
+
+  border:none;
+
+  border-radius:50px;
+
+  background:#E5E5E5;
+  color:#fff;
+
+  font-weight:bold;
+
+  cursor:pointer;
+  margin-top:20px; 
+  position:relative;
+  overflow:hidden;
+
+  transition:.3s;
+}
+
+.comprar:hover{
+  background:#666;
+}
+
+/* =========================================================
+   DESCRIÇÃO DO PRODUTO
+   Mesmas cores do site — só um sublinhado curto no título e uma
+   largura de leitura mais confortável no parágrafo.
+========================================================= */
+
+/* centraliza e limita a largura do texto pra facilitar a leitura */
+.detalhes-produto {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5% 40px;
+}
+
+/* título com sublinhado curto (border-bottom só do tamanho do texto,
+   por causa do display: inline-block) */
+.detalhes-produto h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #111;
+  display: inline-block;
+}
+
+.detalhes-produto p {
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: #444;
+  max-width: 760px;
+  /* preserva quebras de linha que o admin digitou no textarea, sem
+     precisar de nenhum processamento — o texto vem puro do banco */
+  white-space: pre-line;
+}
+
+
+/* =========================================================
+   "CLIENTES USANDO O PRODUTO"
+   Galeria de fotos dos clientes, tipo mosaico.
+========================================================= */
+
+.clientes {
+  max-width: 1400px;
+  margin: 48px auto;
+  padding: 0 5%;
+  background: transparent;
+}
+
+/* Garante o mesmo peso tipográfico do menu da página inicial. */
+.topo .menu > a,
+.topo .menu .link-menu {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+}
+
+.galeria-clientes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-auto-rows: 360px;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.foto-cliente {
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f3f3f3;
+}
+
+.foto-cliente img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease;
+}
+
+.foto-cliente:hover img {
+  transform: scale(1.06);
+}
+
+/* =========================================================
+   DIVISOR
+   Linha decorativa fina, usada para separar seções da página.
+========================================================= */
+
+.divisor{
+    width: 189px;
+    height: 3px;
+    background: #666;
+    margin: 40px auto 40px;
+    border-radius: 10px;
+}
+
+/* =========================================================
+   RESPONSIVO — TELAS MÉDIAS (até 1100px)
+   Empilha o cabeçalho e a página de produto (miniaturas,
+   imagem e info deixam de ficar lado a lado).
+   Obs: este bloco é substituído/ajustado de forma mais fina
+   pelo breakpoint 1100px da seção "Ajustes responsivos finais",
+   lá no fim do arquivo.
+========================================================= */
+
+@media(max-width:1100px){
+
+  .cabecalho{
+    flex-direction:column;
+    gap:20px;
+  }
+
+  .logo-area{
+    flex-direction:column;
+  }
+
+  .produto{
+    flex-direction:column;
+    align-items:center;
+
+    padding:40px 20px;
+  }
+
+  .imagem-principal img{
+    width:100%;
+    max-width:450px;
+  }
+
+  .info{
+    width:100%;
+    max-width:500px;
+  }
+
+}
+
+/* =========================================================
+   PRODUTOS RELACIONADOS
+   Carrossel horizontal com os cards de outros produtos.
+========================================================= */
+
+.relacionados{
+    padding:48px 5%;
+    position:relative;
+    background:#fff;
+}
+
+
+/* corta o que passar da largura, escondendo o "excesso" do carrossel */
+.carrossel-container{
+    overflow:hidden;
+}
+
+.carrossel{
+  display:flex;
+  gap:20px;
+  overflow-x:auto; /* permite arrastar/rolar os cards na horizontal */
+  scroll-behavior:smooth;
+
+  /* esconde a barra de rolagem (Firefox) */
+  scrollbar-width:none;
+}
+
+/* esconde a barra de rolagem (Chrome/Safari/Edge) */
+.carrossel::-webkit-scrollbar{
+  display:none;
+}
+
+/* largura do card só faz sentido aqui, dentro do carrossel de
+   relacionados (fica flexível pra não estourar em telas estreitas) */
+.carrossel .card-produto {
+  width:280px;
+  flex-shrink:0;
+}
+
+
+/* =========================================================
+   CARD DO PRODUTO (mesmo modelo usado no catálogo/sessões de
+   produtos — aqui só com o necessário pra funcionar como link:
+   nos relacionados o card inteiro é um <a> pro produto)
+========================================================= */
+
+.card-produto {
+  position: relative;
+
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .05);
+  transition: transform .3s ease, box-shadow .3s ease;
+
+  /* flex em coluna: permite empurrar o preço pro fundo do card
+     com margin-top:auto mais abaixo, mesmo quando o título
+     ocupa menos espaço que o normal */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  /* o card inteiro é um <a> pro produto: reseta o azul e o
+     sublinhado padrão de link */
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-produto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+.card-produto img {
+  width: 100%;
+  height: 300px;
+
+  object-fit: contain;
+  background: #f3f3f3;
+  padding: 15px;
+
+  display: block;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  transition: transform .3s ease;
+}
+
+.card-produto:hover img {
+  transform: scale(1.03);
+}
+
+.card-produto-imagem {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #f3f3f3;
+}
+
+.card-produto a:not(.botao-ver-produto) {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+}
+
+/* selo de desconto */
+.card-produto .desconto {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  background: #111;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  z-index: 2;
+}
+
+/* nome do produto: travado em 2 linhas, pra um nome curto não
+   deixar o preço torto em relação aos cards vizinhos */
+.card-produto p {
+  margin: 16px 16px 10px;
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #212121;
+  text-align: left;
+
+  min-height: 2.7em;                 /* 1.35 (line-height) x 2 linhas */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* preço antigo (riscado) dentro do card — precisa de seletor
+   próprio porque ".preco-antigo" sozinho já é usado lá em cima
+   pro preço grande da página de detalhes (18px) */
+.card-produto .preco-antigo {
+  margin: 0 16px;
+  color: #888;
+  text-decoration: line-through;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* preço atual do card */
+.card-produto .preco-relacionado,
+.card-produto .preco-atual {
+  margin: 6px 16px 18px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: .3px;
+  display: block;
+  text-align: left;
+
+  margin-top: auto;                  /* empurra o preço pro fundo do card */
+}
+
+
+/* =========================================================
+   SETAS DE NAVEGAÇÃO DO CARROSSEL (< e >)
+========================================================= */
+
+.seta{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%); /* centraliza verticalmente */
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1px solid #fff;
+    background:#fff;
+    cursor:pointer;
+    font-size:22px;
+    z-index:10;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.esquerda{
+    left:12px;
+}
+
+.direita{
+    right:12px;
+}
+
+.seta:hover{
+    background:#f3f3f3;
+}
+
+/* =========================================================
+   RESPONSIVO — CELULAR (até 700px), primeira leva de ajustes
+========================================================= */
+
+@media(max-width:700px){
+
+  /* menu quebra linha e centraliza os itens */
+  .menu{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .header-right{
+    flex-direction:column;
+  }
+
+  .busca-container{
+    width:100%;
+  }
+
+  /* miniaturas passam a ficar em linha (em vez de coluna) */
+  .miniaturas{
+    flex-direction:row;
+  }
+
+  /* quantidade e botão de comprar empilham em vez de ficar lado a lado */
+  .acoes-produto{
+    flex-direction:column;
+  }
+
+  .comprar{
+    height:55px;
+  
+
+  }
+
+}
+
+/* =========================================================
+   AJUSTES RESPONSIVOS FINAIS
+   Bloco mais recente/fino de responsividade, usando clamp()
+   e min() para telas fluidas. Refina (e em alguns casos
+   sobrescreve) os breakpoints acima.
+========================================================= */
+
+/* box-sizing global: padding e borda passam a contar dentro
+   da largura/altura declarada, evitando "estouro" de layout */
+* {
+  box-sizing: border-box;
+}
+
+/* trava a largura máxima da página de produto em telas grandes
+   e centraliza o conteúdo */
+.produto {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+/* mega menu nunca passa da largura da tela (com 32px de folga) */
+.mega-menu {
+  width: min(600px, calc(100vw - 32px));
+  min-width: 0;
+}
+
+/* coluna de info nunca ultrapassa 420px, mas encolhe em telas menores */
+.info {
+  width: min(420px, 100%);
+}
+
+/* título do produto: tamanho de fonte fluido entre 26px e 38px */
+.info h1 {
+  font-size: clamp(26px, 4vw, 38px);
+}
+
+/* preço: tamanho de fonte fluido entre 32px e 42px */
+.preco {
+  font-size: clamp(32px, 5vw, 42px);
+  margin-bottom: 40px;
+}
+
+/* permite esconder a seção de clientes via atributo HTML "hidden" */
+.clientes[hidden] {
+  display: none;
+}
+
+/* --- tablets (até 1100px) --- */
+@media (max-width: 1100px) {
+  .produto {
+    gap: 28px;
+    padding: 40px 20px;
+  }
+
+  /* miniaturas ficam em linha, acima da imagem, com rolagem horizontal */
+  .miniaturas {
+    order: 2;
+    width: 100%;
+    max-width: 580px;
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .imagem-principal {
+    order: 1;
+    max-width: 580px;
+  }
+
+  .info {
+    order: 3;
+    max-width: 580px;
+  }
+}
+
+/* --- celulares (até 700px) --- */
+@media (max-width: 700px) {
+  .voltar {
+    margin: 16px 16px 0;
+  }
+
+  .cabecalho {
+    padding: 14px;
+  }
+
+  .menu {
+    gap: 12px;
+  }
+
+  /* mega menu não faz sentido em telas pequenas: some por completo */
+  .mega-menu {
+    display: none !important;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
+
+  .busca-container {
+    max-width: 340px;
+  }
+
+  .produto {
+    padding: 28px 16px;
+  }
+
+  .thumb {
+    width: 72px;
+    height: 86px;
+    border-radius: 8px;
+  }
+
+  .tamanhos {
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 20px;
+  }
+
+  .quantidade {
+    width: 100%;
+  }
+
+  .clientes {
+    margin: 50px 0;
+    padding: 0 16px;
+  }
+
+  .galeria-clientes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 230px;
+    gap: 10px;
+  }
+
+  .detalhes-produto {
+    padding: 0 16px 30px;
+  }
+
+  /* setas do carrossel somem em celular (rolagem é por toque/arrasto) */
+  .seta {
+    display: none;
+  }
+}
+
+.card-produto-preco {
+  display: contents;
+}

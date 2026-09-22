@@ -1,0 +1,438 @@
+/* CONTA.CSS — estilos da página "Minha Conta" (dados_pessoais.html) */
+
+/* =====================================================
+   LAYOUT GERAL: sidebar + conteúdo
+===================================================== */
+
+.area-conta {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 5% 80px;
+  gap: 48px;
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar-conta {
+  width: 260px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 24px;
+  position: sticky;
+  top: 90px; /* abaixo do header sticky do global.css */
+}
+
+.cabecalho-simples {
+  margin-bottom: 20px;
+}
+
+.cabecalho-simples .logo {
+  height: 40px;
+}
+
+.cartao-perfil .nome {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.linha-picote {
+  border: none;
+  border-top: 1px dashed #ddd;
+  margin: 0 0 20px;
+}
+
+.nav-conta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-conta a {
+  text-decoration: none;
+  color: #444;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-conta a:hover {
+  background: #f5f5f5;
+}
+
+.nav-conta a.ativo {
+  background: #111;
+  color: #fff;
+}
+
+.nav-conta button.destrutivo {
+  text-align: left;
+  background: none;
+  border: none;
+  color: #c0392b;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 8px;
+}
+
+.nav-conta button.destrutivo:hover {
+  background: #fdeaea;
+}
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+.conteudo-conta {
+  flex: 1;
+  min-width: 0;
+}
+
+.conteudo-conta h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+}
+
+.subtitulo {
+  color: #777;
+  font-size: 14px;
+  margin: 0 0 32px;
+}
+
+.secao-conta {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.cabecalho-secao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cabecalho-secao h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.link-editar {
+  text-decoration: none;
+  color: #111;
+  font-size: 13px;
+  font-weight: 700;
+  border-bottom: 1px solid #111;
+  padding-bottom: 1px;
+  transition: opacity 0.2s ease;
+}
+
+.link-editar:hover {
+  opacity: 0.6;
+}
+
+/* dados pessoais: grade de campos */
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.campo label {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.campo .valor {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* login e segurança */
+
+.linha-login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.linha-login:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.rotulo {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.linha-login .valor {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   ENDEREÇOS
+===================================================== */
+
+.lista-enderecos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.sem-enderecos {
+  color: #888;
+  font-size: 14px;
+}
+
+.item-endereco {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+
+.item-endereco .tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+  background: #f0f0f0;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.item-endereco .texto {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.item-endereco .acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.item-endereco .link-excluir {
+  text-decoration: none;
+  color: #c0392b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.item-endereco .link-excluir:hover {
+  opacity: 0.7;
+}
+
+.botao-adicionar {
+  background: none;
+  border: 1.5px dashed #ccc;
+  border-radius: 10px;
+  padding: 12px 16px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.botao-adicionar:hover {
+  border-color: #111;
+  color: #111;
+}
+
+/* =====================================================
+   MODAIS (extraído do <style> inline do HTML)
+===================================================== */
+
+.fundo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.fundo-modal.aberto {
+  display: flex;
+}
+
+.caixa-modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.caixa-modal h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.campo-modal {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-modal label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.campo-modal input,
+.campo-modal select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.campo-modal input:focus,
+.campo-modal select:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.linha-modal {
+  display: flex;
+  gap: 10px;
+}
+
+.linha-modal .campo-modal {
+  flex: 1;
+}
+
+.acoes-modal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.acoes-modal button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  transition: opacity 0.2s ease;
+}
+
+.acoes-modal button:hover {
+  opacity: 0.85;
+}
+
+.botao-cancelar {
+  background: #eee;
+  color: #111;
+}
+
+.botao-salvar {
+  background: #111;
+  color: #fff;
+}
+
+.mensagem-erro {
+  color: #c0392b;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.badge-principal {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 900px) {
+  .area-conta {
+    flex-direction: column;
+    padding: 24px 5% 60px;
+  }
+
+  .sidebar-conta {
+    width: 100%;
+    position: static;
+  }
+
+  .nav-conta {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .secao-conta {
+    padding: 20px;
+  }
+
+  .item-endereco {
+    flex-direction: column;
+  }
+
+  .item-endereco .acoes {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .linha-modal {
+    flex-direction: column;
+  }
+}

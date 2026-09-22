@@ -1,0 +1,212 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  background-image: url("../imagens/gerais/fundo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.pagina-endereco {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.endereco-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 430px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.card-endereco,
+.lista-enderecos {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+}
+
+.card-endereco h1,
+.lista-enderecos h2 {
+  margin: 0 0 8px;
+  color: #111;
+}
+
+.card-endereco p {
+  margin: 0 0 22px;
+  color: #666;
+  font-size: 14px;
+}
+
+.card-endereco input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+.card-endereco input:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#botaoSalvarEndereco {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.endereco-card {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 14px;
+  background: #fff;
+}
+
+.endereco-card h3 {
+  margin: 0 0 8px;
+}
+
+.endereco-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.badge-principal {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.endereco-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.endereco-acoes button {
+  border: none;
+  border-radius: 7px;
+  padding: 9px 12px;
+  cursor: pointer;
+  background: #eee;
+  font-weight: bold;
+}
+#botaoCancelarEdicao {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#botaoCancelarEdicao:hover {
+  background: #eee;
+}
+.btn-remover-endereco {
+  color: #b00020;
+}
+
+.modal-excluir {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9998;
+}
+
+.modal-excluir.ativo {
+  display: flex;
+}
+
+.modal-excluir-card {
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.modal-excluir-card h3 {
+  margin: 0 0 8px;
+  color: #111;
+}
+
+.modal-excluir-card p {
+  margin: 0 0 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.modal-excluir-acoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.modal-excluir-acoes button {
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#cancelarExclusaoEndereco {
+  background: #eee;
+  color: #111;
+}
+
+#confirmarExclusaoEndereco {
+  background: #b00020;
+  color: #fff;
+}
+
+@media (max-width: 850px) {
+  .endereco-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .linha {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

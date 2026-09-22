@@ -1,0 +1,827 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* =====================================================
+   IDENTIDADE VISUAL COMPARTILHADA (login, cadastro,
+   redefinir senha E dashboard de conta/pedidos usam isso)
+   ===================================================== */
+
+/* fundo cobrindo a tela inteira, com degradê animado */
+.fundo-animado {
+  background: linear-gradient(-45deg, #929292, #f1f1f1, #475458, #000000);
+  background-size: 400% 400%;
+  animation: movimento-degrade 15s ease infinite;
+}
+
+@keyframes movimento-degrade {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-24px); }
+}
+
+/* número gigante e bem apagado, só pra dar textura de marca —
+   usado tanto no fundo do login quanto na sidebar do dashboard */
+.marca-agua {
+    position: absolute;
+    right: -30px;
+    bottom: -50px;
+    font-size: 300px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.06);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+@keyframes entrada-card {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes entrada-item {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   CABEÇALHO SIMPLES — só logo, usado nas telas de
+   autenticação (login, cadastro, redefinir senha), que
+   ficam sobre o .fundo-animado escuro
+   ===================================================== */
+.cabecalho-simples {
+    position: relative;
+    z-index: 1;
+    padding: 24px 4%;
+    text-align: center;
+    background: transparent;
+}
+
+.cabecalho-simples .logo {
+    height: 48px;
+    width: auto;
+    transition: opacity 0.2s ease;
+    filter: brightness(0) invert(1); /* logo branca sobre fundo escuro */
+}
+
+.cabecalho-simples .logo:hover {
+    opacity: 0.7;
+}
+
+/* =====================================================
+   TELA DE LOGIN / CADASTRO / REDEFINIR SENHA
+   ===================================================== */
+.login-container {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.login-card {
+    background: #f9f9f9;
+    padding: 48px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    animation: entrada-card 0.6s ease forwards;
+}
+
+.login-card h1 {
+    margin: 0 0 8px;
+    color: #000;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-card p {
+    margin: 0 0 32px;
+    color: #000;
+    font-size: 14px;
+}
+
+.login-card h1,
+.login-card p,
+.login-card .infos,
+.login-card button,
+.login-card .links {
+    opacity: 0;
+    animation: entrada-item 0.5s ease forwards;
+}
+
+.login-card h1                    { animation-delay: 0.15s; }
+.login-card p                     { animation-delay: 0.22s; }
+.login-card .infos:nth-of-type(1) { animation-delay: 0.29s; }
+.login-card .infos:nth-of-type(2) { animation-delay: 0.36s; }
+.login-card button                { animation-delay: 0.43s; }
+.login-card .links                { animation-delay: 0.5s; }
+
+.infos {
+    margin-bottom: 14px;
+}
+
+.infos input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #f3f3f3;
+    border-radius: 6px;
+    outline: none;
+    font-size: 15px;
+    color: #000;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.infos input::placeholder {
+    color: #999;
+}
+
+.infos input:focus {
+    border-color: #0e0e0e;
+    box-shadow: 0 0 0 3px rgba(14, 14, 14, 0.08);
+}
+
+.neon {
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+button {
+    margin-top: 8px;
+    width: 100%;
+    padding: 14px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+button:hover {
+    background-color: #2b2b2b;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.links {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.links a {
+    color: #797979;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.links a:hover {
+    color: #000000;
+}
+
+.links span {
+    color: #000;
+}
+
+/* =====================================================
+   DASHBOARD DE CONTA (dados_pessoais.html, meus_pedidos.html)
+   Mesma linguagem visual do login: sidebar escura com degradê
+   animado + marca d'água, tipografia grande em caixa alta,
+   cards com entrada em cascata. Layout quebra a centralização:
+   sidebar fixa na esquerda, conteúdo ocupa o resto da largura
+   (sem max-width estreito no meio da tela).
+   ===================================================== */
+
+.area-conta {
+  display: flex;
+  align-items: stretch;
+  min-height: calc(100vh - 40px); /* desconta a faixa de anúncio do global.css */
+}
+
+/* SIDEBAR — reaproveita o mesmo degradê animado do login, dando
+   à sidebar a mesma personalidade visual, não só o conteúdo */
+.sidebar-conta {
+  position: relative;
+  width: 280px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #929292, #f1f1f1, #475458, #000000);
+  background-size: 400% 400%;
+  animation: movimento-degrade 15s ease infinite;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+/* header interno da sidebar (antes reaproveitava .cabecalho-simples,
+   o que colidia com o cabeçalho da tela de login — agora tem nome
+   próprio) */
+.topo-sidebar-conta {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 28px;
+}
+
+.topo-sidebar-conta .logo {
+  height: 36px;
+  filter: brightness(0) invert(1);
+}
+
+.sidebar-conta .marca-agua {
+  font-size: 220px;
+  right: -60px;
+  bottom: -40px;
+}
+
+.cartao-perfil {
+  position: relative;
+  z-index: 1;
+}
+
+.cartao-perfil .nome {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.linha-picote {
+  border: none;
+  border-top: 1px dashed rgba(255, 255, 255, 0.25);
+  margin: 0 0 24px;
+}
+
+.nav-conta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-conta a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-conta a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.nav-conta a.ativo {
+  background: #fff;
+  color: #111;
+}
+
+.nav-conta button.destrutivo {
+  text-align: left;
+  background: none;
+  border: none;
+  color: #ff8a80;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 12px;
+}
+
+.nav-conta button.destrutivo:hover {
+  background: rgba(255, 138, 128, 0.15);
+}
+
+/* CONTEÚDO — largo, alinhado à esquerda (não centralizado num
+   miolo estreito), com forte contraste de escala tipográfica */
+
+.conteudo-conta {
+  flex: 1;
+  min-width: 0;
+  padding: 48px 5% 80px;
+}
+
+.conteudo-conta h1 {
+  margin: 0 0 8px;
+  font-size: 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #111;
+  opacity: 0;
+  animation: entrada-item 0.5s ease forwards;
+  animation-delay: 0.1s;
+}
+
+.subtitulo {
+  color: #777;
+  font-size: 14px;
+  margin: 0 0 36px;
+  opacity: 0;
+  animation: entrada-item 0.5s ease forwards;
+  animation-delay: 0.18s;
+}
+
+.secao-conta {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  animation: entrada-item 0.5s ease forwards;
+}
+
+.secao-conta:nth-of-type(1) { animation-delay: 0.26s; }
+.secao-conta:nth-of-type(2) { animation-delay: 0.34s; }
+.secao-conta:nth-of-type(3) { animation-delay: 0.42s; }
+
+.cabecalho-secao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cabecalho-secao h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.link-editar {
+  text-decoration: none;
+  color: #111;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #111;
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.link-editar:hover {
+  opacity: 0.6;
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.campo label {
+  display: block;
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.campo .valor {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.linha-login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.linha-login:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.rotulo {
+  margin: 0 0 4px;
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+
+.linha-login .valor {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ENDEREÇOS */
+
+.lista-enderecos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.sem-enderecos {
+  color: #888;
+  font-size: 14px;
+}
+
+.item-endereco {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.item-endereco:hover {
+  border-color: #ccc;
+}
+
+.item-endereco .tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #fff;
+  background: #111;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.item-endereco .texto {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.item-endereco .acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.item-endereco .link-excluir {
+  text-decoration: none;
+  color: #c0392b;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.item-endereco .link-excluir:hover {
+  opacity: 0.7;
+}
+
+.botao-adicionar {
+  background: none;
+  border: 1.5px dashed #ccc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.botao-adicionar:hover {
+  border-color: #111;
+  color: #111;
+  background: #fafafa;
+}
+
+.badge-principal {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+/* PEDIDOS (meus_pedidos.html) */
+
+.pedido-card {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  border: 1px solid #eee;
+  transition: border-color 0.2s ease;
+}
+
+.pedido-card:hover {
+  border-color: #ccc;
+}
+
+.pedido-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pedido-numero {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.pedido-data {
+  color: #999;
+  font-size: 13px;
+}
+
+.pedido-status {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* cores de status: único lugar do dashboard com cor "de verdade",
+   funcionando como sinalização (verde = ok, amarelo = atenção,
+   cinza = neutro) em cima da base preto/branco do resto do site */
+.status-entregue { background: #dff5e1; color: #1b7a34; }
+.status-em_transito { background: #fff3d6; color: #a3720a; }
+.status-processando { background: #e5e5e5; color: #555; }
+
+.pedido-itens {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.pedido-total {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.pedido-metodo {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.sem-pedidos {
+  text-align: center;
+  color: #999;
+  padding: 60px 0;
+  font-size: 14px;
+}
+
+/* =====================================================
+   MODAIS (usados em dados_pessoais.html)
+   ===================================================== */
+
+.fundo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.fundo-modal.aberto {
+  display: flex;
+}
+
+.caixa-modal {
+  background: #fff;
+  padding: 28px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.caixa-modal h3 {
+  margin: 0 0 20px;
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.campo-modal {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-modal label {
+  font-size: 12px;
+  margin-bottom: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #555;
+}
+
+.campo-modal input,
+.campo-modal select {
+  padding: 11px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.campo-modal input:focus,
+.campo-modal select:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.linha-modal {
+  display: flex;
+  gap: 10px;
+}
+
+.linha-modal .campo-modal {
+  flex: 1;
+}
+
+.acoes-modal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.acoes-modal button {
+  width: auto;
+  margin-top: 0;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.botao-cancelar {
+  background: #eee;
+  color: #111;
+}
+
+.botao-cancelar:hover {
+  background: #e2e2e2;
+}
+
+.botao-salvar {
+  background: #111;
+  color: #fff;
+}
+
+.mensagem-erro {
+  color: #c0392b;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
+
+@media (max-width: 900px) {
+  .area-conta {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .sidebar-conta {
+    width: 100%;
+    padding: 24px 5%;
+  }
+
+  .nav-conta {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .conteudo-conta {
+    padding: 36px 5% 60px;
+  }
+
+  .conteudo-conta h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
+  }
+
+  .login-card h1 {
+    font-size: 22px;
+  }
+
+  .cabecalho-simples {
+    padding: 18px 4%;
+  }
+
+  .cabecalho-simples .logo {
+    height: 40px;
+  }
+
+  .marca-agua {
+    font-size: 180px;
+  }
+
+  body {
+    background-attachment: scroll;
+  }
+
+  .secao-conta {
+    padding: 20px;
+  }
+
+  .item-endereco {
+    flex-direction: column;
+  }
+
+  .item-endereco .acoes {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .linha-modal {
+    flex-direction: column;
+  }
+}
