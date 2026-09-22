@@ -1,0 +1,544 @@
+/* INDEX.CSS - estilos específicos da página inicial (home) */
+
+/* vídeo de destaque */
+
+.video-fundo {
+  width: 100%;
+  height: 88vh;
+  min-height: 480px;
+  max-height: 820px;
+  background-color: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.icone-carrinho {
+  position: relative;
+}
+
+/* faixa de benefícios */
+
+.faixa-beneficios {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 70px;
+  padding: 30px 5%;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.item-beneficio {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.item-beneficio img.icone-beneficio {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.item-beneficio p {
+  font-size: 20px;
+  line-height: 1.4;
+  color: #000000;
+  margin: 0;
+}
+
+.item-beneficio p b {
+  font-weight: 800;
+}
+
+.item-beneficio p span {
+  font-weight: 500;
+  font-size: 11px;
+}
+
+/* categorias */
+
+.categorias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+}
+
+.categoria-item {
+  background: #fff;
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  width: min(360px, 100%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categoria-item a {
+  display: block;
+}
+
+.categoria-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.12);
+}
+
+.categoria-item h2 {
+  margin-top: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.categoria-imagem {
+  width: 100%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.img-categoria {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.categoria-item:hover .img-categoria {
+  transform: scale(1.06);
+}
+
+/* marcas */
+
+.marcas {
+  display: flex;
+  flex-direction: column; /* corrigido: empilha o cabeçalho em cima da faixa de logos, em vez de lado a lado */
+  align-items: center;    /* corrigido: centraliza os dois filhos horizontalmente */
+  justify-content: center;
+  width: 100%;
+  padding: clamp(24px, 4vw, 50px) 20px;
+  background: #f3f3f3;
+}
+
+.marcas-cabecalho {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 22px;
+  text-align: center;
+}
+
+.marcas-cabecalho p {
+  margin: 0 0 6px;
+  color: #777;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.marcas-cabecalho h2 { margin: 0; font-size: clamp(26px, 4vw, 38px); }
+
+
+.moldura-marcas {
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* eram 6 colunas — numa faixa de até 1200px isso deixa cada coluna
+   estreita, e como a logo tem max-width:100%, ela ficava pequena
+   mesmo o clamp() do height pedindo mais. 4 colunas dá mais largura
+   pra cada logo respirar. */
+.marcas-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2.5vw, 48px);
+  padding: 10px 0;
+  width: 100%;
+}
+
+/* cada link vira uma "fatia" de largura igual (6 fatias iguais somam
+   100% da faixa) — assim as 6 logos SEMPRE cabem por inteiro, nunca
+   ficam cortadas nem exigem rolagem, e continuam centralizadas
+   porque a faixa toda é preenchida de ponta a ponta */
+.marcas-track > a {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-marca {
+  width: 100%;
+  height: clamp(60px, 9vw, 150px);
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.2s ease;
+}
+
+.logo-marca:hover {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+/* o arquivo da Planet Girls tem bastante espaço vazio ao redor
+   da marca dentro do próprio PNG, então na mesma altura das outras
+   ela aparece bem menor — compensamos com uma altura maior aqui */
+.Planet {
+  height: clamp(85px, 13vw, 210px);
+}
+
+/* mesmo problema da Planet Girls: o círculo da Sergio Tacchini e o
+   brasão da Polo Ralph Lauren ocupam só uma fração central do PNG,
+   com bastante espaço vazio nas laterais — na mesma altura das
+   outras marcas, o desenho em si fica visivelmente menor */
+.tacchini,
+.polo {
+  height: clamp(75px, 11vw, 185px);
+}
+
+/* divisor */
+
+.divisor {
+  width: 160px;
+  height: 3px;
+  background: #666;
+  margin: 32px auto;
+  border-radius: 10px;
+}
+
+/* destaques / carrossel */
+
+.destaques {
+  padding: 48px 5%;
+  position: relative;
+  background-color: #fff;
+}
+
+.moldura-carrossel {
+  overflow: hidden;
+}
+
+.carrossel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.carrossel::-webkit-scrollbar {
+  display: none;
+}
+
+/* largura do card só faz sentido aqui, dentro do carrossel
+   (no catálogo o card fica numa grade e a largura é fluida) */
+.carrossel .produto-card,
+.carrossel .card-produto {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   CARD DO PRODUTO (MODELO SESSÕES — igual em todas as páginas
+   que mostram produto: home, catálogo e relacionados)
+========================================================= */
+
+.produto-card,
+.card-produto {
+  position: relative;                /* referência para os filhos, ex.: o selo de desconto */
+
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .05);
+  transition: transform .3s ease, box-shadow .3s ease;
+
+  /* flex em coluna: permite empurrar o preço pro fundo do card
+     com margin-top:auto mais abaixo, mesmo quando o título
+     ocupa menos espaço que o normal */
+  display: flex;
+  flex-direction: column;
+
+  /* caso o card inteiro seja um <a>, remove o azul/sublinhado padrão de link */
+  text-decoration: none;
+  color: inherit;
+}
+
+.produto-card:hover,
+.card-produto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+/* caso o link fique só dentro do card (não o card em si) */
+.produto-card a:not(.botao-ver-produto),
+.card-produto a:not(.botao-ver-produto) {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+}
+
+/* imagem do produto */
+.produto-card img,
+.card-produto img,
+.card-produto-imagem img {
+  width: 100%;
+  height: 300px;
+
+  object-fit: contain;               /* mostra o produto inteiro, sem cortar */
+  background: #f3f3f3;
+  padding: 15px;
+
+  display: block;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  transition: transform .3s ease;
+}
+
+.produto-card:hover img,
+.card-produto:hover img,
+.card-produto:hover .card-produto-imagem img {
+  transform: scale(1.03);
+}
+
+/* suporte para quando a imagem vem dentro de uma div .card-produto-imagem */
+.card-produto-imagem {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #f3f3f3;
+  box-sizing: border-box;
+}
+
+/* selo de desconto */
+.desconto {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  background: #111;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  z-index: 2;
+}
+
+/* nome do produto: travado em 2 linhas, pra um nome curto não
+   deixar o preço torto em relação aos cards vizinhos */
+.produto-card h3,
+.produto-card p,
+.card-produto h3,
+.card-produto p {
+  margin: 16px 16px 10px;
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #212121;
+  text-align: left;
+
+  min-height: 2.7em;                 /* 1.35 (line-height) x 2 linhas */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* preço antigo (riscado) */
+.preco-antigo {
+  margin: 0 16px;
+  color: #888;
+  text-decoration: line-through;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* preço atual */
+.preco,
+.preco-atual,
+.preco-relacionado {
+  margin: 6px 16px 18px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: .3px;
+  text-align: left;
+  display: block;
+
+  margin-top: auto;                  /* empurra o preço pro fundo do card */
+}
+
+/* neutraliza um container antigo de preço lado a lado, caso ainda exista em algum HTML */
+.card-produto-preco {
+  display: contents;
+}
+
+/* overlay: botão flutuante que sobe no hover */
+.overlay {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #111;
+  color: #fff;
+
+  padding: 10px 20px;
+  border-radius: 10px;
+  white-space: nowrap;
+
+  transition: .3s;
+}
+
+.produto-card:hover .overlay,
+.card-produto:hover .overlay {
+  bottom: 20px;
+}
+
+/* setas do carrossel de produtos */
+
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: #fff;
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.3s ease;
+}
+
+.seta:hover {
+  background: #f3f3f3;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.seta:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.seta-esquerda {
+  left: 12px;
+}
+
+.seta-direita {
+  right: 12px;
+}
+
+/* responsivo */
+
+@media (max-width: 1024px) {
+  .faixa-beneficios {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .video-fundo {
+    height: 55vh;
+    min-height: 320px;
+  }
+
+  .faixa-beneficios {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 24px 8%;
+  }
+
+  .item-beneficio p {
+    font-size: 16px;
+  }
+
+  .categorias {
+    gap: 20px;
+    padding: 32px 12px;
+  }
+
+  .destaques {
+    padding: 32px 5%;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  /* card menor no carrossel em telas pequenas
+     (antes essa regra usava min-width/min-height junto com uma
+     largura fixa mais acima, então nunca encolhia de verdade —
+     agora sobrescreve a largura diretamente) */
+  .carrossel .produto-card,
+  .carrossel .card-produto {
+    width: 220px;
+  }
+
+  .seta {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .categoria-imagem {
+    height: 200px;
+  }
+
+  .item-beneficio {
+    gap: 12px;
+  }
+
+  .item-beneficio img.icone-beneficio {
+    width: 22px;
+    height: 22px;
+  }
+
+}
